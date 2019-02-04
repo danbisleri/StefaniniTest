@@ -1,0 +1,66 @@
+﻿@model Stefanini.Models.CustomerList
+@{
+    ViewBag.Title = "Customer List";
+}
+<h1>
+    Customer List
+</h1>
+<hr />
+@Html.Partial("Search", Model.Search)
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].Classification.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].Phone)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].Gender.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].City.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].Region.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customers[0].LastPurchase)</th>
+                    @if (ViewData["IsAdmin"] != null && ((bool)ViewData["IsAdmin"]))
+                    {
+                        <th>@Html.DisplayNameFor(model => model.Customers[0].UserSys.Login)</th>
+                    }
+                    else
+                    {
+                        <th></th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Customers.Count > 0)
+                {
+                    foreach (var item in Model.Customers)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(i => item.Classification.Name)</td>
+                            <td>@Html.DisplayFor(i => item.Name)</td>
+                            <td>@Html.DisplayFor(i => item.Phone)</td>
+                            <td>@Html.DisplayFor(i => item.Gender.Name)</td>
+                            <td>@Html.DisplayFor(i => item.City.Name)</td>
+                            <td>@Html.DisplayFor(i => item.Region.Name)</td>
+                            <td>@Html.DisplayFor(i => item.LastPurchase)</td>
+                            @if (ViewData["IsAdmin"] != null && ((bool)ViewData["IsAdmin"]))
+                            {
+                                <td>@Html.DisplayFor(i => item.UserSys.Login)</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="text-center" colspan="8">No results.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
