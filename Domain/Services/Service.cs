@@ -11,7 +11,7 @@ namespace Domain.Services
 
     public class Service<TEntity> where TEntity : Entity
     {
-        private ISession _session;
+        protected ISession _session;
 
         public Service()
         {

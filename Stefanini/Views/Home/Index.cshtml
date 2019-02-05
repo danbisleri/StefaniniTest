@@ -64,3 +64,26 @@
         </table>
     </div>
 </div>
+@section scripts {
+<script type="text/javascript">
+        $("#CityDropdown").on('change', function () {
+            var cityId = $(this).val();
+            var url = '@Url.Action("GetRegions", "Home")' + '?cityId=' + cityId;
+            var regions = $.getJSON(url, function (data) {
+                if (data) {
+                    var regionDropdown = $("#RegionDropdown");
+                    var caption = $("#RegionDropdown option:first");
+                    regionDropdown.empty();
+                    regionDropdown.append(caption);
+                    $.each(data, function (index, option) {
+                        var optionTag = document.createElement("option");
+                        optionTag.setAttribute("value", option.Value);
+                        optionTag.text = option.Text;
+                        regionDropdown.append(optionTag);
+                    });
+                }
+            });
+        });
+
+    </script>
+}
